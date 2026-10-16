@@ -1,0 +1,365 @@
+﻿<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>PoultryTrack &bull; Bantu Usaha Ayam di Pasar Tradisional</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- TOP HEADER IDENTIK PERSIS MOCKUP GAMBAR -->
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="header-brand">
+        <h1>PoultryTrack</h1>
+        <p>Bantu usaha ayam di<br>pasar tradisional</p>
+      </div>
+      <div class="header-right">
+        <div class="badge-lapak-buka">
+          Lapak Buka &bull; 07:00â€“18:00
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN VIEWPORT -->
+  <main class="app-viewport">
+
+    <!-- ==========================================
+         TAB 1: KASIR TRANSAKSI (PERSIS SEPERTI GAMBAR)
+         ========================================== -->
+    <section class="tab-pane active" id="kasir">
+      <div class="screen-flow">
+
+        <!-- 1. CUSTOMER TOGGLE (ECERAN vs MITRA BON) -->
+        <div class="surface-card" style="padding: 10px;">
+          <div class="segmented-customer">
+            <button type="button" class="segment-btn active" id="btnTypeEceran" onclick="selectCustType('eceran')">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              <span>Eceran Tunai</span>
+            </button>
+            <button type="button" class="segment-btn" id="btnTypeLangganan" onclick="selectCustType('langganan')">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+              <span>Mitra Langganan (Bon)</span>
+            </button>
+          </div>
+
+          <!-- Dropdown jika memilih mitra langganan -->
+          <div id="boxPartnerDropdown" style="display:none; margin-top:10px; padding:6px 4px;">
+            <label style="font-size:12px; font-weight:700; color:#4A5568; display:block; margin-bottom:4px;">Pilih Nama Langganan Tetap:</label>
+            <select id="selectMitraLangganan" style="width:100%; padding:10px 12px; border-radius:10px; border:1px solid #CBD5E0; font-size:14px; font-weight:700;" onchange="onMitraSelected()">
+              <!-- Injected via JS -->
+            </select>
+            <div id="badgeSaldoMitra" style="margin-top:6px; font-size:12px; color:#E53E3E; font-weight:700; display:none;">
+              Sisa Saldo Bon Saat Ini: <span id="valSaldoMitra">Rp 0</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. CARD JUMLAH KARKAS (EKOR) DENGAN STEPPER BESAR -->
+        <div class="surface-card">
+          <div class="card-meta-header">
+            <div>
+              <span class="meta-label">Jumlah Karkas (Ekor)</span>
+              <span class="meta-caption">Ayam Broiler Hidup / Segar</span>
+            </div>
+          </div>
+          <div class="stepper-box-custom">
+            <button type="button" class="btn-step-minus" onclick="stepEkor(-1)">&minus;</button>
+            <div class="stepper-input-card">
+              <span id="displayEkor" class="font-numeric">3 Ekor</span>
+            </div>
+            <button type="button" class="btn-step-plus" onclick="stepEkor(1)">&#43;</button>
+          </div>
+        </div>
+
+        <!-- 3. CARD BOBOT TIMBANG NETTO (INPUT RAKSASA & QUICK PILLS) -->
+        <div class="surface-card">
+          <div class="card-meta-header">
+            <span class="meta-label">Bobot Timbang Netto</span>
+            <span class="badge-stabil">Timbangan Stabil</span>
+          </div>
+
+          <div class="weight-card-display">
+            <input type="number" step="0.1" id="inputBeratKg" value="5.40" class="weight-huge-num" oninput="updateCalculation()">
+            <span class="weight-unit-label">Kg</span>
+          </div>
+
+          <span class="meta-caption" style="margin-top:10px;">Ketik bobot sendiri atau pilih berat cepat</span>
+
+          <div class="pill-grid-5">
+            <button type="button" class="pill-btn" onclick="setPresetKg(0.5)">0.5 Kg</button>
+            <button type="button" class="pill-btn" onclick="setPresetKg(1.0)">1.0 Kg</button>
+            <button type="button" class="pill-btn" onclick="setPresetKg(1.5)">1.5 Kg</button>
+            <button type="button" class="pill-btn" onclick="setPresetKg(2.0)">2.0 Kg</button>
+            <button type="button" class="pill-btn" onclick="setPresetKg(2.5)">2.5 Kg</button>
+          </div>
+        </div>
+
+        <!-- 4. CARD POTONGAN AYAM & SUB-CUSTOM BOX -->
+        <div class="surface-card">
+          <div class="card-meta-header">
+            <span class="meta-label">Potongan Ayam</span>
+          </div>
+
+          <div class="cuts-tab-row">
+            <button type="button" class="cut-tab-btn" id="cutUtuh" onclick="selectCutTab('Utuh')">Utuh</button>
+            <button type="button" class="cut-tab-btn active" id="cut4" onclick="selectCutTab('4 Potong')">4 Potong</button>
+            <button type="button" class="cut-tab-btn" id="cutFillet" onclick="selectCutTab('Fillet')">Fillet</button>
+          </div>
+
+          <!-- Box Sub-Custom Sesuai Gambar -->
+          <div class="custom-potong-card">
+            <div style="font-size:12px; font-weight:800; color:#111A24; margin-bottom:8px;">Custom</div>
+            <div class="custom-grid-2">
+              <div class="field-sub-box">
+                <span class="field-sub-label">Jumlah potong</span>
+                <input type="number" id="inputJumlahPotong" value="4" class="field-sub-input">
+              </div>
+              <div class="field-sub-box">
+                <span class="field-sub-label">Request</span>
+                <input type="text" id="inputRequestPotong" value="Dada saja" class="field-sub-input">
+              </div>
+            </div>
+
+            <!-- Toggle Switch Tanpa Kulit -->
+            <div class="switch-row">
+              <span class="switch-label">Tanpa kulit</span>
+              <label class="switch-box">
+                <input type="checkbox" id="toggleTanpaKulit" checked>
+                <span class="slider-round"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. CARD HARGA PER KG -->
+        <div class="surface-card">
+          <div class="card-meta-header">
+            <span class="meta-label">Harga per Kg</span>
+          </div>
+          <div class="price-card-display">
+            <span class="price-sub-caption">Standar Pasar Pagi</span>
+            <div style="display:flex; align-items:center; gap:4px;">
+              <span style="font-size:18px; font-weight:800; color:#111A24;">Rp</span>
+              <input type="number" id="inputHargaKg" value="42000" step="500" class="price-bold-figure" style="border:none; background:transparent; width:130px; text-align:right; outline:none;" oninput="updateCalculation()">
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. CARD TOTAL TAGIHAN & AKSI BAYAR (LENGKAP) -->
+        <div class="checkout-card">
+          <div class="checkout-total-row">
+            <span class="checkout-total-label">Total Tagihan</span>
+            <div class="checkout-total-val" id="displayTotalTagihan">Rp 226.800</div>
+          </div>
+          <div class="checkout-formula" id="displayFormula">5.40 Kg &times; Rp 42.000</div>
+
+          <!-- Pilihan Cara Bayar -->
+          <div class="payment-type-grid">
+            <button type="button" class="pay-btn-opt active" id="payTunai" onclick="selectPayType('tunai')">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="12" x="2" y="6" rx="2"/><circle cx="12" cy="12" r="2"/></svg>
+              <span>Tunai Lunas</span>
+            </button>
+            <button type="button" class="pay-btn-opt" id="payBon" onclick="selectPayType('bon')">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              <span>Catat Bon (Tempo)</span>
+            </button>
+          </div>
+
+          <button type="button" class="btn-submit-order" onclick="simpanPesananKasir()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Simpan Transaksi Kasir</span>
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================
+         TAB 2: BUKU PIUTANG (BON)
+         ========================================== -->
+    <section class="tab-pane" id="buku-bon">
+      <div class="screen-flow">
+        <div class="surface-card">
+          <div class="card-meta-header">
+            <span class="meta-label">Total Piutang Berjalan</span>
+            <span class="badge-stabil" style="background:#FED7D7; color:#E53E3E;">Wajib Tagih</span>
+          </div>
+          <div style="font-size:32px; font-weight:800; color:#E53E3E; margin:6px 0;" id="bonTotalHeader">
+            Rp 4.850.000
+          </div>
+          <p class="meta-caption">Tersebar di 12 mitra warung makan &amp; katering langganan</p>
+        </div>
+
+        <div class="surface-card">
+          <div class="card-meta-header">
+            <span class="meta-label">Daftar Rekap Bon Mitra</span>
+          </div>
+          <div id="listMitraBonContainer" style="display:flex; flex-direction:column; gap:10px;">
+            <!-- Rendered via JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         TAB 3: ANTREAN JURU POTONG (WARM EARTHY THEME FAATIN)
+         ========================================== -->
+    <section class="tab-pane" id="antrean">
+      <div class="screen-flow">
+        <!-- Hero Header Antrean -->
+        <div class="surface-card">
+          <div class="card-meta-header">
+            <div>
+              <span class="meta-label">Antrean Pemotongan Karkas</span>
+              <span class="meta-caption">Monitor pesanan potong untuk juru potong lapak</span>
+            </div>
+            <span class="badge-stabil">Live Update</span>
+          </div>
+          <div style="font-size:13px; color:var(--text-muted); margin-top:2px;">
+            Spesifikasi karkas pesanan yang sedang diproses agar tidak salah potong saat jam sibuk subuh.
+          </div>
+        </div>
+
+        <!-- List Antrean Cards -->
+        <div class="surface-card">
+          <div class="card-meta-header">
+            <span class="meta-label">Daftar Antrean Aktif</span>
+            <span class="badge-lapak-buka" style="font-size:11px; padding:3px 8px;" id="badgeTotalAntrean">2 Antrean</span>
+          </div>
+          
+          <div id="queueContainerFaatin" style="display:flex; flex-direction:column; gap:10px; margin-top:10px;">
+            <!-- Rendered via JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         TAB 4: PASOKAN SUPIR PETERNAK
+         ========================================== -->
+    <section class="tab-pane" id="pasokan">
+      <div class="screen-flow">
+        <div class="surface-card">
+          <div class="card-meta-header">
+            <span class="meta-label">Pemasok Karkas Utama</span>
+            <span class="badge-stabil">Subuh 04:30 WIB</span>
+          </div>
+          <h2 style="font-size:18px; font-weight:800; margin:2px 0;">UD. Cheyloo Farm Kamal</h2>
+          <p class="meta-caption">Supir: Pak Matrawi &bull; Plat: M 8214 UA</p>
+        </div>
+
+        <div class="surface-card">
+          <div class="card-meta-header">
+            <span class="meta-label">Input Manifes Pasokan Masuk</span>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <div>
+              <label style="font-size:12px; font-weight:700; color:#4A5568;">Jumlah Ayam Masuk (Ekor):</label>
+              <input type="number" id="inSupEkor" value="180" class="field-sub-input" style="border:1px solid #CBD5E0; padding:10px; border-radius:8px; margin-top:4px;">
+            </div>
+            <div>
+              <label style="font-size:12px; font-weight:700; color:#4A5568;">Berat Timbang Bersih (Kg Netto):</label>
+              <input type="number" step="0.5" id="inSupKg" value="300.5" class="field-sub-input" style="border:1px solid #CBD5E0; padding:10px; border-radius:8px; margin-top:4px;">
+            </div>
+            <div>
+              <label style="font-size:12px; font-weight:700; color:#4A5568;">Harga Kulakan Peternak / Kg:</label>
+              <input type="number" id="inSupPrice" value="23500" class="field-sub-input" style="border:1px solid #CBD5E0; padding:10px; border-radius:8px; margin-top:4px;">
+            </div>
+            <button type="button" class="btn-submit-order" style="background:#5C3822; margin-top:6px;" onclick="simpanPasokanMasuk()">
+              Simpan Manifes Pasokan Subuh
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         TAB 5: REKAP KAS LACI
+         ========================================== -->
+    <section class="tab-pane" id="rekap-kas">
+      <div class="screen-flow">
+        <div class="surface-card" style="background:var(--color-brown-light); border-color:var(--color-brown-border);">
+          <span class="checkout-total-label" style="color:var(--color-brown);">Uang Fisik Wajib Ada di Laci Meja</span>
+          <div style="font-size:32px; font-weight:800; color:var(--color-brown); margin:4px 0;" id="rekapKasLaciDisplay">
+            Rp 3.160.000
+          </div>
+          <p class="meta-caption" style="color:var(--color-brown);">Rumus: (Penjualan Tunai + Cicilan Bon) &minus; Modal Ayam</p>
+        </div>
+
+        <div class="surface-card">
+          <div class="card-meta-header">
+            <span class="meta-label">Rincian Arus Kas Hari Ini</span>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid var(--border-light);">
+              <span>(+) Penjualan Tunai Eceran</span>
+              <strong style="color:#2F855A;" id="rekapPenjualanTunai">Rp 5.240.000</strong>
+            </div>
+            <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid var(--border-light);">
+              <span>(+) Setoran Cicilan Bon Mitra</span>
+              <strong style="color:#2F855A;" id="rekapCicilanMasuk">Rp 1.420.000</strong>
+            </div>
+            <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid var(--border-light);">
+              <span>(&minus;) Modal Pasokan Tunai (UD. Cheyloo)</span>
+              <strong style="color:#E53E3E;" id="rekapModalKeluar">- Rp 3.500.000</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- BOTTOM MOBILE NAVIGATION BAR -->
+  <nav class="bottom-nav-bar" id="mobileTabBar">
+    <button type="button" class="bnav-item active" onclick="switchTab('kasir', this)">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect height="14" rx="2" width="20" x="2" y="3"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>
+      <span>Kasir</span>
+    </button>
+    <button type="button" class="bnav-item" onclick="switchTab('buku-bon', this)">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10"/><path d="M6 10h10"/></svg>
+      <span>Buku Bon</span>
+    </button>
+    <button type="button" class="bnav-item" onclick="switchTab('antrean', this)">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h7"/></svg>
+      <span>Antrean</span>
+    </button>
+    <button type="button" class="bnav-item" onclick="switchTab('pasokan', this)">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      <span>Pasokan</span>
+    </button>
+    <button type="button" class="bnav-item" onclick="switchTab('rekap-kas', this)">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect height="18" rx="2" width="18" x="3" y="3"/><line x1="8" x2="16" y1="12" y2="12"/><line x1="12" x2="12" y1="8" y2="16"/></svg>
+      <span>Rekap Laci</span>
+    </button>
+  </nav>
+
+  <!-- MODAL: STRUK THERMAL 58MM -->
+  <div class="modal-backdrop" id="receiptModal" style="display:none;">
+    <div class="modal-sheet">
+      <div class="modal-sheet-header">
+        <h3 style="font-size:17px; font-weight:800; color:#111A24;">Struk Transaksi Tersimpan</h3>
+        <button type="button" class="modal-close-btn" onclick="closeReceiptModal()">&times;</button>
+      </div>
+      <div style="background:#FFFDF9; color:#111; font-family:'JetBrains Mono',monospace; font-size:13px; padding:14px; border:1px dashed #777; border-radius:6px; line-height:1.4;" id="receiptBody">
+        <!-- Rendered via JS -->
+      </div>
+      <div style="display:flex; gap:8px; margin-top:14px;">
+        <button type="button" class="btn-step-minus" style="width:auto; flex:1; font-size:14px; height:44px;" onclick="closeReceiptModal()">Tutup</button>
+        <button type="button" class="btn-submit-order" style="flex:2; height:44px; padding:0 12px; font-size:14px;" onclick="alert('Perintah cetak 58mm dikirim ke Printer Thermal Bluetooth!'); closeReceiptModal();">
+          Cetak Thermal (58mm)
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
+

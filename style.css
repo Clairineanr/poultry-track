@@ -1,0 +1,650 @@
+:root {
+  /* Warm Earthy Palette sesuai Mockup Faatin */
+  --bg-app: #F5F7FA;
+  --bg-surface: #FFFFFF;
+  --bg-subtle: #F8FAFC;
+  --bg-input: #F8FAFC;
+
+  --border-light: #EAEFF4;
+  --border-subtle: #DDE4EC;
+  --border-active: #6E472B;
+
+  --text-primary: #111A24;
+  --text-secondary: #4A5568;
+  --text-muted: #718096;
+  --text-light: #A0AEC0;
+
+  /* Accent Colors */
+  --color-brown: #6E472B;
+  --color-brown-dark: #54351F;
+  --color-brown-light: #FBF6F0;
+  --color-brown-border: #E8DCCF;
+
+  --color-badge-open: #5C3822;
+  --color-badge-open-text: #FFFFFF;
+
+  --color-tag-gold: #FDF4E7;
+  --color-tag-gold-text: #975A16;
+
+  --color-danger: #E53E3E;
+  --color-danger-subtle: #FFF5F5;
+  --color-danger-border: #FED7D7;
+
+  --color-success: #2F855A;
+  --color-success-subtle: #F0FFF4;
+
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --radius-xs: 8px;
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 22px;
+  --radius-pill: 9999px;
+
+  --shadow-card: 0 2px 10px rgba(0, 0, 0, 0.03), 0 0 1px rgba(0, 0, 0, 0.06);
+  --shadow-active: 0 4px 14px rgba(110, 71, 43, 0.25);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background-color: var(--bg-app);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  line-height: 1.45;
+  font-size: 14px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-numeric {
+  font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+}
+
+.text-danger { color: var(--color-danger); }
+.text-success { color: var(--color-success); }
+.text-muted { color: var(--text-muted); }
+
+/* TOP HEADER PERSIS GAMBAR */
+.app-header {
+  background: #FFFFFF;
+  border-bottom: 1px solid var(--border-light);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  padding: 14px 16px;
+}
+
+.header-inner {
+  max-width: 480px;
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.header-brand h1 {
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: #111A24;
+  line-height: 1.1;
+}
+
+.header-brand p {
+  font-size: 12.5px;
+  color: var(--text-muted);
+  font-weight: 500;
+  margin-top: 4px;
+}
+
+/* Badge Jam Operasional Kanan Atas Cokelat */
+.badge-lapak-buka {
+  background: var(--color-badge-open);
+  color: var(--color-badge-open-text);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  letter-spacing: -0.2px;
+}
+
+.badge-lapak-buka::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  background: #FFF;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* MAIN VIEWPORT */
+.app-viewport {
+  max-width: 480px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 14px 14px 90px;
+}
+
+.screen-flow {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* SURFACE CARD */
+.surface-card {
+  background: var(--bg-surface);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-card);
+}
+
+.card-meta-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.meta-label {
+  font-size: 15px;
+  font-weight: 800;
+  color: #111A24;
+}
+
+.meta-caption {
+  font-size: 12px;
+  color: var(--text-muted);
+  display: block;
+  margin-top: 2px;
+}
+
+.badge-stabil {
+  background: var(--color-tag-gold);
+  color: var(--color-tag-gold-text);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+}
+
+/* SEGMENTED TOGGLE (ECERAN vs LANGGANAN) */
+.segmented-customer {
+  background: #EDF1F5;
+  border-radius: var(--radius-sm);
+  padding: 4px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.segment-btn {
+  border: none;
+  background: transparent;
+  padding: 12px 10px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.segment-btn.active {
+  background: #FFFFFF;
+  color: #111A24;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* STEPPER EKOR */
+.stepper-box-custom {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-step-minus {
+  width: 52px;
+  height: 52px;
+  background: #EDF1F5;
+  border: none;
+  border-radius: var(--radius-sm);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  font-size: 24px;
+  font-weight: 700;
+  color: #111A24;
+  transition: background 0.1s;
+}
+
+.btn-step-minus:active {
+  background: #DFE5EB;
+}
+
+.stepper-input-card {
+  flex: 1;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 800;
+  color: #111A24;
+}
+
+.btn-step-plus {
+  width: 52px;
+  height: 52px;
+  background: var(--color-brown);
+  border: none;
+  border-radius: var(--radius-sm);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  font-size: 24px;
+  font-weight: 700;
+  color: #FFFFFF;
+  box-shadow: 0 3px 0 var(--color-brown-dark);
+  transition: transform 0.06s, box-shadow 0.06s;
+}
+
+.btn-step-plus:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 var(--color-brown-dark);
+}
+
+/* BOBOT TIMBANG NETTO (DISPLAY BESAR) */
+.weight-card-display {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.weight-huge-num {
+  font-size: 38px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  color: #111A24;
+  font-family: var(--font-sans);
+  border: none;
+  background: transparent;
+  width: 180px;
+  outline: none;
+}
+
+.weight-unit-label {
+  font-size: 20px;
+  font-weight: 700;
+  color: #4A5568;
+}
+
+/* QUICK PILL WEIGHT PRESETS */
+.pill-grid-5 {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.pill-btn {
+  background: #FFFFFF;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-pill);
+  padding: 8px 4px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #111A24;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.12s;
+}
+
+.pill-btn:hover, .pill-btn.active {
+  background: var(--color-brown-light);
+  border-color: var(--color-brown);
+  color: var(--color-brown);
+}
+
+/* POTONGAN AYAM TABS */
+.cuts-tab-row {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr 1fr;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.cut-tab-btn {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  padding: 12px 8px;
+  font-size: 14px;
+  font-weight: 800;
+  color: #4A5568;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.12s;
+}
+
+.cut-tab-btn.active {
+  background: var(--color-brown-light);
+  border: 1.5px solid var(--color-brown);
+  color: var(--color-brown);
+}
+
+/* CUSTOM POTONGAN SUB-CARD */
+.custom-potong-card {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+}
+
+.custom-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 10px;
+}
+
+.field-sub-box {
+  background: #FFFFFF;
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+
+.field-sub-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-weight: 600;
+  display: block;
+}
+
+.field-sub-input {
+  border: none;
+  background: transparent;
+  width: 100%;
+  font-size: 15px;
+  font-weight: 800;
+  color: #111A24;
+  outline: none;
+  margin-top: 2px;
+}
+
+/* TOGGLE SWITCH TANPA KULIT */
+.switch-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--border-subtle);
+}
+
+.switch-label {
+  font-size: 14px;
+  font-weight: 700;
+  color: #111A24;
+}
+
+.switch-box {
+  position: relative;
+  display: inline-block;
+  width: 48px;
+  height: 26px;
+}
+
+.switch-box input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider-round {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: #CBD5E0;
+  transition: .2s;
+  border-radius: 34px;
+}
+
+.slider-round:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: .2s;
+  border-radius: 50%;
+}
+
+input:checked + .slider-round {
+  background-color: var(--color-brown);
+}
+
+input:checked + .slider-round:before {
+  transform: translateX(22px);
+}
+
+/* HARGA PER KG CARD */
+.price-card-display {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.price-sub-caption {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.price-bold-figure {
+  font-size: 22px;
+  font-weight: 800;
+  color: #111A24;
+}
+
+/* RINGKASAN TAGIHAN & AKSI BAYAR */
+.checkout-card {
+  background: #FFFFFF;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 16px;
+}
+
+.checkout-total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.checkout-total-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.checkout-total-val {
+  font-size: 26px;
+  font-weight: 800;
+  color: #111A24;
+}
+
+.checkout-formula {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-align: right;
+  margin-top: -8px;
+  margin-bottom: 14px;
+}
+
+.payment-type-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.pay-btn-opt {
+  background: var(--bg-subtle);
+  border: 1.5px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  font-size: 14px;
+  font-weight: 800;
+  color: #111A24;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all 0.12s;
+}
+
+.pay-btn-opt.active {
+  background: var(--color-brown-light);
+  border-color: var(--color-brown);
+  color: var(--color-brown);
+}
+
+.btn-submit-order {
+  width: 100%;
+  background: var(--color-brown);
+  color: #FFFFFF;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 4px 0 var(--color-brown-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: transform 0.06s, box-shadow 0.06s;
+}
+
+.btn-submit-order:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 var(--color-brown-dark);
+}
+
+/* BOTTOM MOBILE NAVIGATION BAR */
+.bottom-nav-bar {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background: #FFFFFF;
+  border-top: 1px solid var(--border-light);
+  display: flex;
+  z-index: 60;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.bnav-item {
+  flex: 1;
+  background: transparent;
+  border: none;
+  padding: 10px 4px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #718096;
+  cursor: pointer;
+}
+
+.bnav-item.active {
+  color: var(--color-brown);
+}
+
+/* MODAL STRUK & POPUP */
+.modal-backdrop {
+  position: fixed; inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(2px);
+  z-index: 100;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+@media (min-width: 500px) {
+  .modal-backdrop { align-items: center; padding: 14px; }
+}
+
+.modal-sheet {
+  background: #FFFFFF;
+  border-radius: 20px 20px 0 0;
+  max-width: 440px;
+  width: 100%;
+  padding: 20px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+@media (min-width: 500px) {
+  .modal-sheet { border-radius: 20px; }
+}
+
+.modal-sheet-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.modal-close-btn {
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #718096;
+}
+
+/* TAB CONTENT SWITCHING */
+.tab-pane {
+  display: none;
+}
+.tab-pane.active {
+  display: block;
+}
