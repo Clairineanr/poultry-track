@@ -17,3 +17,5 @@ Aplikasi web kasir (*Point of Sale*) dan pembukuan piutang (*bon tempo*) luring 
 4. **Izam Rosiawan** (103102400049) — *Project Manager*
 5. **Faatin Jamiilatul Hasanah** (108102500037) — *UI/UX Designer*
 
+## Cek Web App
+https://poultry-track-bkda.vercel.app/
