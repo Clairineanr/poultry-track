@@ -422,10 +422,53 @@ function switchTab(tabId, btn) {
   if (tabId === 'rekap-kas') renderRekapKas();
 }
 
+/* ==========================================================================
+   REALTIME CLOCK & OPERATIONAL STATUS (SESUAI GAMBAR REFERENSI)
+   ========================================================================== */
+function initLiveClock() {
+  const clockEl = document.getElementById('liveClockDisplay');
+  const statusPill = document.getElementById('statusLapakPill');
+  const statusText = document.getElementById('statusLapakText');
+
+  function update() {
+    const now = new Date();
+    const hours = String(now.getHours()).padStart(2, '0');
+    const mins = String(now.getMinutes()).padStart(2, '0');
+    const secs = String(now.getSeconds()).padStart(2, '0');
+
+    if (clockEl) {
+      clockEl.innerText = `${hours}.${mins}.${secs} WIB`;
+    }
+
+    // Jam operasional lapak ayam pasar (03:00 - 18:00 WIB)
+    const currentHour = now.getHours();
+    const isOpen = currentHour >= 3 && currentHour < 18;
+
+    if (statusPill && statusText) {
+      if (isOpen) {
+        statusPill.style.background = '#E6F5EE';
+        statusPill.style.color = '#177A4D';
+        statusPill.style.borderColor = '#C6F6D5';
+        statusText.innerText = 'Lapak Buka';
+      } else {
+        statusPill.style.background = '#FED7D7';
+        statusPill.style.color = '#C53030';
+        statusPill.style.borderColor = '#FEB2B2';
+        statusText.innerText = 'Lapak Tutup';
+      }
+    }
+  }
+
+  update();
+  setInterval(update, 1000);
+}
+
 // Initial Run
 window.addEventListener('DOMContentLoaded', () => {
+  initLiveClock();
   updateCalculation();
   renderCuttingQueue();
   renderBukuBon();
   renderRekapKas();
 });
+

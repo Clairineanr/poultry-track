@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <title>PoultryTrack &bull; Bantu Usaha Ayam di Pasar Tradisional</title>
+  <title>PoultryTrack &bull; Pelaku Usaha Mikro • Pasar Tradisional</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700;800&display=swap" rel="stylesheet">
@@ -22,9 +22,13 @@
           <p style="margin-top:2px;">Bantu usaha ayam di<br>pasar tradisional</p>
         </div>
       </div>
-      <div class="header-right">
-        <div class="badge-lapak-buka">
-          Lapak Buka &bull; 07:00–18:00
+      <div class="header-right" style="display:flex; align-items:center; gap:8px;">
+        <div class="badge-lapak-buka" id="statusLapakPill" style="background:#E6F5EE; color:#177A4D; border:1px solid #C6F6D5; font-size:12px; font-weight:700; padding:5px 10px; border-radius:99px; display:flex; align-items:center; gap:6px;">
+          <span style="width:7px; height:7px; border-radius:50%; background:#177A4D; display:inline-block;"></span>
+          <span id="statusLapakText">Lapak Buka</span>
+        </div>
+        <div class="clock-display" id="liveClockDisplay" style="font-family:'JetBrains Mono', monospace; font-size:13px; font-weight:700; color:#4A5568; background:#F8FAFC; border:1px solid #E2E8F0; padding:4px 8px; border-radius:8px; letter-spacing:0.3px;">
+          --:--:-- WIB
         </div>
       </div>
     </div>
