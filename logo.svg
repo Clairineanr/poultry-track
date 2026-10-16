@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient: Warm Earthy Coffee Brown -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7B5033"/>
+      <stop offset="50%" stop-color="#5C3822"/>
+      <stop offset="100%" stop-color="#412413"/>
+    </linearGradient>
+
+    <!-- Golden Crest Gradient -->
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFDA73"/>
+      <stop offset="100%" stop-color="#E5A922"/>
+    </linearGradient>
+
+    <!-- Fresh Emerald / Growth Accent -->
+    <linearGradient id="greenGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#48BB78"/>
+      <stop offset="100%" stop-color="#2F855A"/>
+    </linearGradient>
+
+    <!-- Soft Ambient Shadow -->
+    <filter id="softShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#1A0D06" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <!-- Base App Icon: Squircle (Rounded Square) -->
+  <rect x="24" y="24" width="464" height="464" rx="112" fill="url(#bgGrad)" filter="url(#softShadow)"/>
+
+  <!-- Subtle Inner Ring Highlight -->
+  <rect x="25" y="25" width="462" height="462" rx="111" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="2"/>
+
+  <!-- GEOMETRIC ROOSTER SILHOUETTE & PRECISION TRACKING GRAPH -->
+  <g transform="translate(256, 256)">
+    <!-- 1. Jengger Ayam / Crest (Geometric Triple Crest - Golden Growth Bars) -->
+    <path d="M-85 -145 C-75 -175 -40 -185 -20 -155 C-5 -180 35 -180 50 -145 C70 -170 105 -155 95 -120 L55 -85 L-55 -85 Z" fill="url(#goldGrad)"/>
+
+    <!-- 2. Kepala & Paruh Ayam Presisi (Modern Minimalist Silhouette) -->
+    <!-- Kepala & Leher Belakang -->
+    <path d="M-90 -100 C-95 -40 -90 40 -40 100 C-10 135 45 145 90 120 C100 115 110 105 110 95 C95 85 75 80 55 85 C15 95 -20 80 -45 50 C-65 25 -70 -20 -65 -90 Z" fill="#FFFFFF" fill-opacity="0.96"/>
+
+    <!-- Paruh Tegas Kanan (Sharp Geometric Beak) -->
+    <polygon points="40,-85 115,-55 40,-25" fill="url(#goldGrad)"/>
+
+    <!-- Gelambir Bawah Paruh / Wattle (Emerald Accent: Profit & Freshness) -->
+    <path d="M40 -15 C40 20 15 35 5 25 C0 18 10 5 25 -10 Z" fill="url(#greenGrad)"/>
+
+    <!-- Mata Minimalis (Modern Eye Dot) -->
+    <circle cx="0" cy="-60" r="11" fill="#412413"/>
+    <circle cx="3" cy="-63" r="3.5" fill="#FFFFFF"/>
+
+    <!-- 3. Elemen Timbangan Digital & Tracking Pulse / Checklist Dinamis -->
+    <!-- Garis Timbangan / Checkmark Dinamis yang Melintang -->
+    <path d="M-125 15 L-85 55 L-40 0" fill="none" stroke="url(#greenGrad)" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+    
+    <!-- Lingkaran Neraca Timbangan / Titik Data -->
+    <circle cx="-125" cy="15" r="7" fill="#FFFFFF"/>
+    <circle cx="-40" cy="0" r="7" fill="#FFFFFF"/>
+  </g>
+
+  <!-- Subtle Brand Wordmark / Initials Indicator at Base -->
+  <text x="256" y="440" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="28" font-weight="800" letter-spacing="6" fill="#FDF4E7" fill-opacity="0.7" text-anchor="middle">POULTRYTRACK</text>
+</svg>
